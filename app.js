@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 var _ = require("lodash");
+require('dotenv').config();
 
 const mongoose = require('mongoose');
+
+const dbURI = process.env.MONGO_URI;
 
 const homeStartingContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non turpis interdum, laoreet purus sed, laoreet risus. Pellentesque sed pellentesque velit. Curabitur porta lacus nec luctus mattis. Phasellus pellentesque purus nec pharetra cursus. Suspendisse nec consequat libero. Ut quis orci libero. Nunc hendrerit nunc erat, ac dignissim eros ultricies sed. Donec cursus finibus elit tempor egestas. Praesent consectetur dui vel vulputate efficitur. Ut luctus dignissim arcu, ut commodo velit fringilla id. Mauris lobortis tristique lorem. Maecenas commodo tristique sapien vulputate dictum.";
 
@@ -22,7 +25,7 @@ app.use((express.static("public")));
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/BlogDB');
+  await mongoose.connect(dbURI);
 }
 
 const BlogSchema = new mongoose.Schema({
